@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Saved Wishlist — AURA</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+  <!-- Header -->
+  <header class="glass-nav border-b border-neutral-100">
+    <div class="max-w-7xl mx-auto px-4 h-20 flex items-center justify-between">
+      <a href="shop.html" class="text-xs uppercase tracking-widest text-neutral-600 hover:text-neutral-900">← Back to Shop</a>
+      <a href="index.html" class="font-serif text-3xl tracking-[0.25em] text-neutral-900">A U R A</a>
+      <button onclick="openCartDrawer()" class="relative text-neutral-800">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" /></svg>
+        <span class="cart-badge-count absolute -top-2 -right-2 bg-[#C5A880] text-white text-[9px] font-bold w-4 h-4 rounded-full flex items-center justify-center hidden">0</span>
+      </button>
+    </div>
+  </header>
+
+  <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+    <div class="text-center max-w-xl mx-auto mb-12">
+      <span class="text-xs uppercase tracking-widest text-[#C5A880] font-semibold">Your Curated Selections</span>
+      <h1 class="font-serif text-3xl sm:text-4xl text-neutral-900 mt-1">Saved Wishlist</h1>
+    </div>
+
+    <div id="wishlist-grid" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+      <!-- Rendered via renderWishlistPage() -->
+    </div>
+  </main>
+
+  <script src="js/products.js"></script>
+  <script src="js/app.js"></script>
+  <script>
+    function renderWishlistPage() {
+      const container = document.getElementById('wishlist-grid');
+      if (!container) return;
+
+      const items = AURA_PRODUCTS.filter(p => State.isInWishlist(p.id));
+
+      if (items.length === 0) {
+        container.innerHTML = `
+          <div class="col-span-4 text-center py-20 bg-white border border-neutral-100">
+            <p class="font-serif text-2xl text-neutral-400 italic mb-4">No pieces currently saved in your wishlist</p>
+            <p class="text-xs text-neutral-500 mb-6">Explore our latest ready-to-wear and save pieces for later.</p>
+            <a href="shop.html" class="inline-block px-8 py-3 bg-neutral-900 text-white text-xs uppercase tracking-widest font-semibold hover:bg-[#C5A880]">Discover Collection</a>
+          </div>
+        `;
+        return;
+      }
+
+      container.innerHTML = items.map(p => generateProductCard(p)).join('');
+    }
+  </script>
+</body>
+</html>

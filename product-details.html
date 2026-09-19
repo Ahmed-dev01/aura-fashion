@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Product Details — AURA</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body class="bg-[#FCFCFA] text-neutral-900 antialiased">
+
+  <!-- Top Announcement -->
+  <div class="bg-neutral-900 text-white text-[11px] uppercase tracking-widest py-2 text-center">
+    Complimentary Express Shipping on Orders Over $200 USD
+  </div>
+
+  <!-- Header -->
+  <header class="sticky top-0 z-40 glass-nav border-b border-neutral-100">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex items-center justify-between h-20">
+        <a href="shop.html" class="text-xs uppercase tracking-widest text-neutral-600 hover:text-neutral-900 transition-colors">← Back to Catalog</a>
+        <a href="index.html" class="font-serif text-3xl sm:text-4xl tracking-[0.25em] text-neutral-900">A U R A</a>
+        
+        <div class="flex items-center gap-5">
+          <a href="wishlist.html" class="relative text-neutral-800 hover:text-[#C5A880]">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" /></svg>
+            <span class="wishlist-badge-count absolute -top-2 -right-2 bg-neutral-900 text-white text-[9px] font-bold w-4 h-4 rounded-full flex items-center justify-center hidden">0</span>
+          </a>
+          <button onclick="openCartDrawer()" class="relative text-neutral-800 hover:text-[#C5A880]">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" /></svg>
+            <span class="cart-badge-count absolute -top-2 -right-2 bg-[#C5A880] text-white text-[9px] font-bold w-4 h-4 rounded-full flex items-center justify-center hidden">0</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Product Details Container -->
+  <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+    <div id="product-detail-view" class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
+      <!-- Injected Dynamically -->
+    </div>
+  </main>
+
+  <script src="js/products.js"></script>
+  <script src="js/app.js"></script>
+  
+  <script>
+    let currentQty = 1;
+
+    function renderProductDetails() {
+      if (typeof AURA_PRODUCTS === 'undefined') return;
+
+      const params = new URLSearchParams(window.location.search);
+      const prodId = params.get('id') || 'w-01';
+      const product = AURA_PRODUCTS.find(p => p.id === prodId) || AURA_PRODUCTS[0];
+      const container = document.getElementById('product-detail-view');
+      if (!container || !product) return;
+
+      const sizes = product.sizes || ['Standard'];
+      const colors = product.colors || ['Original'];
+      const gallery = (product.gallery && product.gallery.length > 0) ? product.gallery : [product.image];
+
+      container.innerHTML = `
+        <!-- Left: Image Gallery -->
+        <div class="space-y-4">
+          <div class="aspect-[3/4] bg-neutral-100 overflow-hidden border border-neutral-200">
+            <img id="detail-main-image" src="${product.image}" alt="${product.name}" class="w-full h-full object-cover">
+          </div>
+          <div class="flex gap-3">
+            ${gallery.map(img => `
+              <button onclick="document.getElementById('detail-main-image').src='${img}'" class="w-20 aspect-square bg-neutral-100 border border-neutral-300 overflow-hidden hover:border-neutral-900 transition-colors">
+                <img src="${img}" class="w-full h-full object-cover">
+              </button>
+            `).join('')}
+          </div>
+        </div>
+
+        <!-- Right: Purchase Options & Specs -->
+        <div class="space-y-6">
+          <div>
+            <span class="text-xs uppercase tracking-widest text-[#C5A880] font-semibold">${product.category}</span>
+            <h1 class="font-serif text-3xl sm:text-4xl text-neutral-900 mt-1 font-normal">${product.name}</h1>
+            <div class="flex items-center gap-4 mt-3">
+              <span class="text-2xl font-semibold text-neutral-900">$${product.price.toFixed(2)}</span>
+              ${product.oldPrice ? `<span class="text-base text-neutral-400 line-through">$${product.oldPrice.toFixed(2)}</span>` : ''}
+              <span class="text-xs text-amber-600 bg-amber-50 px-2.5 py-1 font-medium">★ ${product.rating} (${product.reviewsCount} Client Reviews)</span>
+            </div>
+          </div>
+
+          <p class="text-sm text-neutral-600 leading-relaxed">${product.description}</p>
+
+          <!-- Size Selector -->
+          <div>
+            <label class="block text-xs uppercase tracking-wider font-bold text-neutral-900 mb-2">Select Size</label>
+            <div class="flex flex-wrap gap-2">
+              ${sizes.map((s, idx) => `
+                <button type="button" onclick="selectPill(this, 'detail-size')" data-val="${s}" class="detail-size px-4 py-2 border text-xs font-semibold ${idx === 0 ? 'border-neutral-900 bg-neutral-900 text-white' : 'border-neutral-200 text-neutral-800 hover:border-neutral-900'}">
+                  ${s}
+                </button>
+              `).join('')}
+            </div>
+          </div>
+
+          <!-- Color Selector -->
+          <div>
+            <label class="block text-xs uppercase tracking-wider font-bold text-neutral-900 mb-2">Select Color</label>
+            <div class="flex flex-wrap gap-2">
+              ${colors.map((c, idx) => `
+                <button type="button" onclick="selectPill(this, 'detail-color')" data-val="${c}" class="detail-color px-4 py-2 border text-xs font-semibold ${idx === 0 ? 'border-neutral-900 bg-neutral-900 text-white' : 'border-neutral-200 text-neutral-800 hover:border-neutral-900'}">
+                  ${c}
+                </button>
+              `).join('')}
+            </div>
+          </div>
+
+          <!-- Quantity Picker & Add to Bag -->
+          <div class="pt-4 flex gap-4">
+            <div class="flex items-center border border-neutral-300">
+              <button onclick="changeDetailQty(-1)" class="px-3 py-2 text-neutral-600 hover:bg-neutral-100 font-bold">-</button>
+              <span id="detail-qty" class="px-4 text-xs font-semibold">1</span>
+              <button onclick="changeDetailQty(1)" class="px-3 py-2 text-neutral-600 hover:bg-neutral-100 font-bold">+</button>
+            </div>
+            <button onclick="addDetailToBag('${product.id}')" class="flex-1 py-4 bg-neutral-900 text-white text-xs uppercase tracking-widest font-semibold hover:bg-[#C5A880] transition-colors shadow">
+              Add to Shopping Bag
+            </button>
+            <button onclick="State.toggleWishlist('${product.id}')" class="p-4 border border-neutral-300 hover:border-neutral-900" title="Save to Wishlist">
+              ♥
+            </button>
+          </div>
+
+          <!-- Information Accordions -->
+          <div class="border-t border-neutral-200 pt-6 space-y-4 text-xs">
+            <details class="group cursor-pointer">
+              <summary class="font-semibold uppercase tracking-wider text-neutral-900 list-none flex justify-between">
+                <span>Fabrication & Sustainable Materials</span>
+                <span>+</span>
+              </summary>
+              <p class="pt-3 text-neutral-500 leading-relaxed">Sourced from historic European mills with low ecological footprints. Hand-inspected and constructed to endure season after season.</p>
+            </details>
+            <details class="group cursor-pointer">
+              <summary class="font-semibold uppercase tracking-wider text-neutral-900 list-none flex justify-between">
+                <span>Complimentary Delivery & Returns</span>
+                <span>+</span>
+              </summary>
+              <p class="pt-3 text-neutral-500 leading-relaxed">Enjoy express courier delivery within 2-3 business days. 30-day effortless trial with pre-paid return vouchers included.</p>
+            </details>
+          </div>
+        </div>
+      `;
+    }
+
+    function changeDetailQty(delta) {
+      currentQty = Math.max(1, currentQty + delta);
+      const qtyEl = document.getElementById('detail-qty');
+      if (qtyEl) qtyEl.textContent = currentQty;
+    }
+
+    function addDetailToBag(productId) {
+      const size = document.querySelector('.detail-size.bg-neutral-900')?.getAttribute('data-val');
+      const color = document.querySelector('.detail-color.bg-neutral-900')?.getAttribute('data-val');
+      State.addToCart(productId, size, color, currentQty);
+    }
+
+    window.addEventListener('load', renderProductDetails);
+  </script>
+</body>
+</html>
