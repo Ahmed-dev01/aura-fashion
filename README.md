@@ -76,6 +76,12 @@ This project was developed to practice frontend web development, responsive desi
 - Real payment gateway
 - Production-ready order processing
 
+## 📸 Screenshots
+
+### Homepage
+
+![AURA Fashion Homepage](screenshots/homepage.png)
+
 ## 👨‍💻 Author
 
 **Ahmed Raza**
