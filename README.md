@@ -1,80 +1,46 @@
 
 # AURA — Luxury Fashion E-Commerce Website
 
-A modern and responsive luxury fashion e-commerce website designed with a premium and minimalist aesthetic.
+A modern and responsive luxury fashion e-commerce website designed with a premium minimalist aesthetic.
+
+[🌐 Live Demo](https://ahmed-dev01.github.io/aura-fashion/)
+
+---
 
 ## 📌 Overview
 
-AURA is a frontend fashion e-commerce website developed to showcase luxury fashion products through an elegant and user-friendly interface.
+AURA is a frontend fashion e-commerce website created to showcase luxury fashion products through an elegant and user-friendly interface.
 
-The project includes product browsing, product details, shopping cart interactions, wishlist functionality, and contact pages.
+The project focuses on responsive design, dynamic product rendering, and interactive shopping experiences.
 
-
-## 🌐 Live Demo
-
-[View AURA Fashion Live Website](https://ahmed-dev01.github.io/aura-fashion/)
+---
 
 ## ✨ Features
 
-- Responsive fashion website design
+- Responsive luxury fashion website
 - Product catalog and product details
 - Dynamic product rendering
+- Category filtering
+- Price filtering
+- Product size and color selection
 - Shopping cart functionality
 - Wishlist functionality
-- Product size and color selection
+- Quantity controls
 - Promo code interface
 - Contact form
 - FAQ section
-- Responsive layouts
+- Responsive user interface
+
+---
 
 ## 🛠️ Technologies Used
 
 - HTML5
 - CSS3
 - JavaScript
-- Tailwind CSS
+- Tailwind CSS (CDN)
 
-## 📂 Project Structure
-
-```text
-aura-fashion/
-├── index.html
-├── shop.html
-├── product-details.html
-├── about.html
-├── contact.html
-├── cart.html
-├── wishlist.html
-├── css/
-│   └── style.css
-└── js/
-    ├── apps.js
-    └── products.js
-```
-
-## 🚀 How to Run
-
-1. Clone the repository:
-
-   ```bash
-   git clone https://github.com/Ahmed-dev01/aura-fashion.git
-   ```
-
-2. Open the project folder.
-
-3. Launch `index.html` using VS Code Live Server.
-
-## 🎯 Project Purpose
-
-This project was developed to practice frontend web development, responsive design, JavaScript interactions, and e-commerce user interface implementation.
-
-## 🔮 Future Improvements
-
-- Backend integration
-- User authentication
-- Database integration
-- Real payment gateway
-- Production-ready order processing
+---
 
 ## 📸 Screenshots
 
@@ -86,7 +52,7 @@ This project was developed to practice frontend web development, responsive desi
 
 ![AURA Fashion Shop Page](screenshots/shop.png)
 
-### Product Details Page
+### Product Details
 
 ![AURA Fashion Product Details](screenshots/product-details.png)
 
@@ -94,11 +60,79 @@ This project was developed to practice frontend web development, responsive desi
 
 ![AURA Fashion Shopping Cart](screenshots/cart.png)
 
+---
+
+## 📂 Project Structure
+
+```text
+aura-fashion/
+├── index.html
+├── about.html
+├── shop.html
+├── product-details.html
+├── cart.html
+├── contact.html
+├── wishlist.html
+├── css/
+│   └── style.css
+├── js/
+│   ├── apps.js
+│   └── products.js
+└── screenshots/
+    ├── homepage.png
+    ├── shop.png
+    ├── product-details.png
+    └── cart.png
+```
+
+---
+
+## 🚀 Getting Started
+
+### 1. Clone the Repository
+
+```bash
+git clone https://github.com/Ahmed-dev01/aura-fashion.git
+```
+
+### 2. Open the Project
+
+Navigate to the project folder.
+
+### 3. Run the Website
+
+Open `index.html` using VS Code Live Server.
+
+---
+
+## 🎯 Project Purpose
+
+This project was developed to practice frontend web development, responsive design, JavaScript interactions, and e-commerce user interface implementation.
+
+It helped me improve my understanding of website structure, dynamic content, and interactive user experiences.
+
+---
+
+## 🔮 Future Improvements
+
+- Backend integration
+- User authentication
+- Database integration
+- Real payment gateway
+- Production-ready order processing
+- Admin dashboard
+- Order management system
+
+---
+
 ## 👨‍💻 Author
 
 **Ahmed Raza**
 
 GitHub: [Ahmed-dev01](https://github.com/Ahmed-dev01)
-**Ahmed Raza**
 
-GitHub: [Ahmed-dev01](https://github.com/Ahmed-dev01)
+---
+
+## 📄 License
+
+This project was created for learning and portfolio purposes.
