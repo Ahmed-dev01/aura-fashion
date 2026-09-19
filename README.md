@@ -90,6 +90,10 @@ This project was developed to practice frontend web development, responsive desi
 
 ![AURA Fashion Product Details](screenshots/product-details.png)
 
+### Shopping Cart
+
+![AURA Fashion Shopping Cart](screenshots/cart.png)
+
 ## 👨‍💻 Author
 
 **Ahmed Raza**
