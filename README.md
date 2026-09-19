@@ -82,6 +82,10 @@ This project was developed to practice frontend web development, responsive desi
 
 ![AURA Fashion Homepage](screenshots/homepage.png)
 
+### Shop Page
+
+![AURA Fashion Shop Page](screenshots/shop.png)
+
 ## 👨‍💻 Author
 
 **Ahmed Raza**
